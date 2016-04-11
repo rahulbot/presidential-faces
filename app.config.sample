@@ -1,0 +1,12 @@
+[mediacloud]
+key = MY_API_KEY
+
+[project]
+query = "bernie sanders" or "hillary clinton" or "ted cruz" or "donald trump"
+media_sources = 1,2,6218,18268,1150,1751
+start_date = 2016-01-01
+end_date = 2016-02-01
+destination = stories
+
+[cache]
+redis_db_number = 1

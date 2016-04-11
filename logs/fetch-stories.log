@@ -1,0 +1,88 @@
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:Found 11535 total stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:Found 11535 total stories
+INFO:root:  New York Times: 2689 stories
+INFO:root:  Washington Post: 6526 stories
+INFO:root:  BuzzFeed - Latest: 521 stories
+INFO:root:  Politico: 4178 stories
+INFO:root:  Wall Street Journal: 2060 stories
+INFO:root:  Guardian: 1545 stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:Found 11535 total stories
+INFO:root:  New York Times: 2689 stories
+INFO:root:  Washington Post: 6526 stories
+INFO:root:  BuzzFeed - Latest: 521 stories
+INFO:root:  Politico: 4178 stories
+INFO:root:  Wall Street Journal: 2060 stories
+INFO:root:  Guardian: 1545 stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:Found 11535 total stories
+INFO:root:  New York Times: 2689 stories
+INFO:root:  Washington Post: 6526 stories
+INFO:root:  BuzzFeed - Latest: 521 stories
+INFO:root:  Politico: 4178 stories
+INFO:root:  Wall Street Journal: 2060 stories
+INFO:root:  Guardian: 1545 stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:Found 11535 total stories
+INFO:root:  New York Times: 2689 stories
+INFO:root:  Washington Post: 6526 stories
+INFO:root:  BuzzFeed - Latest: 521 stories
+INFO:root:  Politico: 4178 stories
+INFO:root:  Wall Street Journal: 2060 stories
+INFO:root:  Guardian: 1545 stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:Found 11535 total stories
+INFO:root:  New York Times: 2689 stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:__main__:Found 2490 total stories
+INFO:root:  New York Times: 805 stories
+INFO:root:  Washington Post: 1764 stories
+INFO:root:  BuzzFeed - Latest: 108 stories
+INFO:root:  Politico: 1251 stories
+INFO:root:  Wall Street Journal: 605 stories
+INFO:root:  Guardian: 417 stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:root:Will write stories to stories
+INFO:__main__:Found 2490 total stories
+INFO:root:  New York Times: 805 stories
+INFO:root:  Washington Post: 1764 stories
+INFO:root:  BuzzFeed - Latest: 108 stories
+INFO:root:  Politico: 1251 stories
+INFO:root:  Wall Street Journal: 605 stories
+INFO:root:  Guardian: 417 stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:root:Will write stories to basedir/stories
+INFO:__main__:Found 2490 total stories
+INFO:root:  New York Times: 805 stories
+INFO:root:  Washington Post: 1764 stories
+INFO:root:  BuzzFeed - Latest: 108 stories
+INFO:__main__:---------------------------------------------------------------------------
+INFO:__main__:Reading from 6 media sources
+INFO:root:Will write stories to /Users/rahulb/Documents/rahulbotics/c4fcm/media-meter/presidential-faces/stories
+INFO:__main__:Found 2490 total stories
+INFO:root:  New York Times: 805 stories
+INFO:root:  Washington Post: 1764 stories
+INFO:root:  BuzzFeed - Latest: 108 stories
+INFO:root:  Politico: 1251 stories
+INFO:root:  Wall Street Journal: 605 stories
+INFO:root:  Guardian: 417 stories
