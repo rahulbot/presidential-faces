@@ -42,6 +42,12 @@ def build_date_query_part(start_date, end_date):
     end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
     return '(publish_date:[{0} TO {1}])'.format(zi_time(start_date), zi_time(end_date))
 
+def is_valid_img(url):
+    if(url.startswith('data')):
+        return False
+    # TODO: automatically remove ad domains
+    return True
+
 MEDIA_SOURCE_IDS = config.get("project","media_sources").split(",")
 logger.info("Reading from {0} media sources".format(len(MEDIA_SOURCE_IDS)))
 
@@ -78,6 +84,7 @@ for source in media_sources:
     page = 0
     media_image_count = 0
     media_story_count = 0
+    media_invalid_image_count = 0
     while True:
         logger.info("  page {0}".format(page))
         query_start_time = time.time()
@@ -91,17 +98,19 @@ for source in media_sources:
             soup = bs4.BeautifulSoup(html_content, 'html.parser')
             story_images = [elem['src'] for elem in soup.findAll('img') if elem.has_attr('src')]
             for img_src in story_images:
-                # TODO: automatically remove ad domains
-                data = {
-                    'media_source': source['name'],
-                    'pub_date': story['publish_date'],
-                    'image_url': img_src,
-                    'mediacloud_stories_id': story['stories_id'],
-                    'story_url': story['url']
-                }
-                image_url_csv.writerow(data)
-                image_url_csv_file.flush()
-                media_image_count = media_image_count + 1
+                if(is_valid_img(img_src)):            
+                    data = {
+                        'media_source': source['name'],
+                        'pub_date': story['publish_date'],
+                        'image_url': img_src,
+                        'mediacloud_stories_id': story['stories_id'],
+                        'story_url': story['url']
+                    }
+                    image_url_csv.writerow(data)
+                    image_url_csv_file.flush()
+                    media_image_count = media_image_count + 1
+                else:
+                    media_invalid_image_count = media_invalid_image_count + 1
             media_story_count = media_story_count + 1
         extract_duration = time.time() - extract_start
         logger.debug("    (extracted in {0} secs)".format(extract_duration))
@@ -109,7 +118,8 @@ for source in media_sources:
             break
         start = max([s['processed_stories_id'] for s in stories])
         page = page + 1
-    logger.info("{0}: Retrieved {1} stories ({2} images)".format(source['name'],media_story_count, media_image_count))
+    logger.info("{0}: Retrieved {1} stories with {2} images ({3} invalid)".format(
+        source['name'],media_story_count, media_image_count,media_invalid_image_count))
     image_count = image_count + media_image_count
     story_count = story_count + media_story_count
 
