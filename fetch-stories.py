@@ -43,7 +43,7 @@ def build_date_query_part(start_date, end_date):
     return '(publish_date:[{0} TO {1}])'.format(zi_time(start_date), zi_time(end_date))
 
 def is_valid_img(url):
-    if(url.startswith('data')):
+    if not url.startswith('http'):
         return False
     # TODO: automatically remove ad domains
     return True
@@ -68,7 +68,7 @@ for media_id in MEDIA_SOURCE_IDS:
 
 # set up a csv to record all the story images
 image_url_csv_file = open(os.path.join(basedir,'image_urls.csv'), 'w')
-fieldnames = ['media_source', 'pub_date', 'image_url', 'mediacloud_stories_id', 'story_url']
+fieldnames = ['media_source', 'pub_date', 'image_url', 'image_width', 'image_height', 'mediacloud_stories_id', 'story_url']
 image_url_csv = unicodecsv.DictWriter(image_url_csv_file, fieldnames = fieldnames, 
     extrasaction='ignore', encoding='utf-8')
 image_url_csv.writeheader()
@@ -96,13 +96,18 @@ for source in media_sources:
         for story in stories:
             html_content = story['raw_first_download_file']
             soup = bs4.BeautifulSoup(html_content, 'html.parser')
-            story_images = [elem['src'] for elem in soup.findAll('img') if elem.has_attr('src')]
-            for img_src in story_images:
+            image_elements = [elem for elem in soup.findAll('img') if elem.has_attr('src')]
+            for img_elem in image_elements:
+                img_src = img_elem['src']
+                img_width = img_elem['width'] if img_elem.has_attr('width') else ''
+                img_height = img_elem['height'] if img_elem.has_attr('height') else ''
                 if(is_valid_img(img_src)):            
                     data = {
                         'media_source': source['name'],
                         'pub_date': story['publish_date'],
                         'image_url': img_src,
+                        'image_width': img_width,
+                        'image_height': img_height,
                         'mediacloud_stories_id': story['stories_id'],
                         'story_url': story['url']
                     }
