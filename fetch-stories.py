@@ -68,6 +68,7 @@ image_url_csv = unicodecsv.DictWriter(image_url_csv_file, fieldnames = fieldname
 image_url_csv.writeheader()
 
 image_count = 0
+story_count = 0
 
 # query MC for stories and  grab raw html content
 for source in media_sources:
@@ -75,17 +76,20 @@ for source in media_sources:
     start = 0
     offset = 500
     page = 0
+    media_image_count = 0
+    media_story_count = 0
     while True:
         logger.info("  page {0}".format(page))
         query_start_time = time.time()
-        stories = api_story_list(QUERY,["media_id:"+media_id,date_range_query], start, offset)
+        stories = api_story_list(QUERY,["media_id:{0}".format(source['media_id']),date_range_query], start, offset)
         query_duration = time.time() - query_start_time
         logger.debug("    (fetched in {0} secs)".format(query_duration))
         # extract image urls
+        extract_start = time.time()
         for story in stories:
             html_content = story['raw_first_download_file']
             soup = bs4.BeautifulSoup(html_content, 'html.parser')
-            story_images = [elem['src'] for elem in soup.findAll('img')]
+            story_images = [elem['src'] for elem in soup.findAll('img') if 'src' in elem]
             for img_src in story_images:
                 # TODO: automatically remove ad domains
                 data = {
@@ -97,14 +101,21 @@ for source in media_sources:
                 }
                 image_url_csv.writerow(data)
                 image_url_csv_file.flush()
-                image_count = image_count + 1
+                media_image_count = media_image_count + 1
+            media_story_count = media_story_count + 1
+        extract_duration = time.time() - extract_start
+        logger.debug("    (extracted in {0} secs)".format(extract_duration))
         if len(stories) < 1:
             break
         start = max([s['processed_stories_id'] for s in stories])
         page = page + 1
-    logger.info('  Retrieved {0} stories for query {1}'.format(len(all_stories), solr_query))
+    logger.info("{0}: Retrieved {1} stories ({2} images)".format(source['name'],media_story_count, media_image_count))
+    image_count = image_count + media_image_count
+    story_count = story_count + media_story_count
 
 total_duration = time.time() - start_time
 logger.info("Done in {0} secs".format(total_duration))
+logger.info("  {0} stories".format(story_count))
+logger.info("  {0} images".format(image_count))
 
 # TODO: manually code for real images or not
