@@ -83,13 +83,13 @@ for source in media_sources:
         query_start_time = time.time()
         stories = api_story_list(QUERY,["media_id:{0}".format(source['media_id']),date_range_query], start, offset)
         query_duration = time.time() - query_start_time
-        logger.debug("    (fetched in {0} secs)".format(query_duration))
+        logger.debug("    (fetched {0} stories in {1} secs)".format(len(stories),query_duration))
         # extract image urls
         extract_start = time.time()
         for story in stories:
             html_content = story['raw_first_download_file']
             soup = bs4.BeautifulSoup(html_content, 'html.parser')
-            story_images = [elem['src'] for elem in soup.findAll('img') if 'src' in elem]
+            story_images = [elem['src'] for elem in soup.findAll('img') if elem.has_attr('src')]
             for img_src in story_images:
                 # TODO: automatically remove ad domains
                 data = {
