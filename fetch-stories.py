@@ -43,7 +43,7 @@ def build_date_query_part(start_date, end_date):
     return '(publish_date:[{0} TO {1}])'.format(zi_time(start_date), zi_time(end_date))
 
 def is_valid_img(url):
-    if not url.startswith('http'):
+    if(url.startswith('data')):
         return False
     # TODO: automatically remove ad domains
     return True
